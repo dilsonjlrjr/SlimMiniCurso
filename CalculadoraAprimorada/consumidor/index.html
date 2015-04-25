@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<form name='calculadora'>
+			<p>
+				<label>Valor 1:</label>
+				<input name="numero1" id="numero1">
+			</p>
+
+			<p>
+				<label>Valor 2:</label>
+				<input name="numero2" id="numero2">
+			</p>
+
+			<p>
+				<label>Operação:</label><br />
+				<input type="radio" name="operacao" id="operacao" value="soma" checked="checked">Soma&nbsp;
+				<input type="radio" name="operacao" id="operacao" value="subtracao">Substração&nbsp;
+				<input type="radio" name="operacao" id="operacao" value="multiplicacao">Multiplicação&nbsp;
+				<input type="radio" name="operacao" id="operacao" value="divisao">Divisão&nbsp;
+			</p>
+
+			<p>
+				<input type="button" value="Calcular Operação" name="btnCalcular" id="btnCalcular" />
+			</p>
+
+			<p>
+				<label>Resultado:</label>
+				<input name="resultado" id="resultado">
+			</p>
+		</form>
+
+		<div id='message'></div>
+
+		<script>
+			$("#btnCalcular").click(function() {
+				var urlOperacao = "http://localhost/SlimMiniCurso/CalculadoraAprimorada/provedor/index.php/" + $("#operacao:checked").val();
+
+				$.ajax({
+					url: urlOperacao,
+					type: "GET",
+					data: {
+						numero1: $("#numero1").val(),
+						numero2: $("#numero2").val()
+					},
+					success: function(data) {
+						$("#resultado").val(data);
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
